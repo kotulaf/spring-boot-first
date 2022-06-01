@@ -112,3 +112,6 @@ we do the same for the email provided by the user
 
 to check if that works we will use a PUT request, but beware of not using the ID as a query parameter in this case, as it doesn't go through...
 we will just put url/IDNUMBER?nameOrEmail=newvalue
+
+in maven, you can install/package an app so it's executable, you can also change where it's running, for example, by default my app was running on localhost(port 8080)
+but i manually changed it to port 8001 in the terminal: --server.port=8001
