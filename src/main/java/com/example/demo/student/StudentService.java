@@ -1,6 +1,7 @@
 package com.example.demo.student;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -52,6 +53,22 @@ public class StudentService {
     {
         Student student = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("student by the ID " + studentId + " does not exist"));
 
-        
+        if(name != null && name.length() > 0 && !Objects.equals(student.getName(), name)) // checking if the name we got is not null, equal to the one already written 
+        {
+            student.setName(name);
+        }
+
+        if(email != null && email.length() > 0 && !Objects.equals(student.getName(), name))
+        {
+            Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
+
+            if(studentOptional.isPresent())
+            {
+                throw new IllegalStateException("email taken");
+            }else
+            {
+                student.setEmail(email);
+            }
+        }
     }
 }
