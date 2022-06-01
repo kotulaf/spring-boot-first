@@ -26,6 +26,7 @@ what is used:
 @DeleteMapping annotation - the class will be executed when we want to delete ("drop") a row from table
 @Query annotation - basically assigning a query to a class
 @PathVariable annotation - is used to extract the value from the URL
+@Transactional annotation - in the Service layer we sometimes need to have both database related and non-database related services. that's when this annotation comes in handy
 
 final keyword - meaning the value cannot be changed
 
@@ -105,3 +106,9 @@ the @PathVariable to id again but now we also request name and email (to edit), 
 in service, we create a new method createStudent which accepts all the parameters and first and foremost assigns a student from the database,
 checks if it exists to begin with (.findById(studentId).orElseThrow(() -> new IllegalStateException("example error")).
 
+we dont have to use query from our repo at all, all is done thanks to the student object.
+then we check whether the name provided is not null, has the length of 0 or already is in the database 
+we do the same for the email provided by the user
+
+to check if that works we will use a PUT request, but beware of not using the ID as a query parameter in this case, as it doesn't go through...
+we will just put url/IDNUMBER?nameOrEmail=newvalue

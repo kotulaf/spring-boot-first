@@ -52,6 +52,7 @@ public class StudentService {
     public void updateStudent(Long studentId, String name, String email)
     {
         Student student = studentRepository.findById(studentId).orElseThrow(() -> new IllegalStateException("student by the ID " + studentId + " does not exist"));
+        // making the job easier by simply assigning the student to the variable, we do not have to use any query from our repo 
 
         if(name != null && name.length() > 0 && !Objects.equals(student.getName(), name)) // checking if the name we got is not null, equal to the one already written 
         {
